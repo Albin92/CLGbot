@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>College Enquiry Chatbot</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <div class="chatbox">
+    <h2>College Enquiry Chatbot</h2>
+    <div id="chatlog"></div>
+    <input type="text" id="userInput" placeholder="Ask something...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const msg = document.getElementById("userInput").value;
+      const chatlog = document.getElementById("chatlog");
+
+      chatlog.innerHTML += `<p><b>You:</b> ${msg}</p>`;
+      document.getElementById("userInput").value = "";
+
+      const response = await fetch("/get", {
+        method: "POST",
+        body: new URLSearchParams({ msg }),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+      });
+
+      const data = await response.json();
+      chatlog.innerHTML += `<p><b>Bot:</b> ${data.response}</p>`;
+    }
+  </script>
+</body>
+</html>
