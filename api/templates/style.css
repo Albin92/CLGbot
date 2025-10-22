@@ -1,29 +1,143 @@
+/* General Body & Font Styling */
 body {
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
 }
+
+/* Chatbox Container */
 .chatbox {
   background: white;
-  padding: 20px;
-  border-radius: 15px;
-  width: 400px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  height: 85vh;
+  max-height: 700px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
+
+/* Chatbox Header */
+.chatbox-header {
+  background: #f7f7f7;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.chatbox-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Chat Log Area */
 #chatlog {
-  height: 300px;
+  flex-grow: 1;
   overflow-y: auto;
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
-input {
-  width: 70%;
-  padding: 8px;
+
+/* Custom Scrollbar */
+#chatlog::-webkit-scrollbar {
+  width: 8px;
 }
-button {
-  padding: 8px 10px;
+
+#chatlog::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+#chatlog::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+#chatlog::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* General Message Styling */
+.message {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 20px;
+  max-width: 75%;
+  line-height: 1.4;
+}
+
+.message p {
+  margin: 0;
+}
+
+/* Bot Message Styling */
+.bot-message {
+  background-color: #f1f1f1;
+  color: #333;
+  align-self: flex-start;
+  border-bottom-left-radius: 5px;
+}
+
+/* User Message Styling */
+.user-message {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 5px;
+}
+
+/* Input Area Styling */
+.input-area {
+  display: flex;
+  padding: 15px 20px;
+  border-top: 1px solid #e0e0e0;
+  background: #f7f7f7;
+  gap: 10px;
+  align-items: center;
+}
+
+#userInput {
+  flex-grow: 1;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+#userInput:focus {
+  border-color: #007bff;
+}
+
+/* Send Button Styling */
+.input-area button {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.input-area button:hover {
+  background: #0056b3;
 }
