@@ -12,5 +12,7 @@ def chat():
     user_input = request.form["msg"]
     response = get_response(user_input)
     return jsonify({"response": response})
+if __name__ == "__main__":
+    app.run()
 
 
