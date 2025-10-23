@@ -1,0 +1,27 @@
+# Ignore virtual environments
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Ignore model files or data
+models/
+datasets/
+notebooks/
+*.pkl
+*.h5
+*.pt
+*.zip
+
+# Ignore large node modules if not needed
+node_modules/
+*.log
+
+# Ignore other unnecessary files
+.DS_Store
+.idea/
+.vscode/
+api/pine.py
+api/data.csv
+api/templates/campus8.jpg
+api/templates/sdit-logo.png
