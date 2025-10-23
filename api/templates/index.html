@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
   <div class="chatbox">
@@ -15,12 +16,12 @@
       <h2>College Enquiry Bot</h2>
     </div>
     <div id="chatlog">
-      <div class="message bot-message">
+      <div class="bot-message">
         <p>Hello! How can I help you today?</p>
       </div>
     </div>
     <div class="input-area">
-      <input type="text" id="userInput" placeholder="Ask something..." onkeyup="if(event.keyCode === 13) sendMessage()">
+      <input type="text" id="textInput" placeholder="Ask something..." onkeyup="if(event.keyCode === 13) sendMessage()">
       <button onclick="sendMessage()" aria-label="Send Message">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
       </button>
@@ -29,32 +30,34 @@
 
 
   <script>
-    async function sendMessage() {
-      const msg= document.getElementById("userInput").value;
-      if (msg== "")return; //dont send empty messages
-      const chatlog = document.getElementById("chatlog");
+   function sendMessage() {
+            let rawText = $("#textInput").val();
+            console.log("Sending message to backend:", rawText);
+           
+            let userHtml = '<p class="user-message"><span>' + rawText + '</span></p>';
+            $("#textInput").val("");
+            $("#chatlog").append(userHtml);
+            document.getElementById('textInput').scrollIntoView({ block: 'start', behavior: 'smooth' });
+      
 
-      chatlog.innerHTML += `<div class="message user-message"><p>${msg}</p></div>`;
-      userInput.value = "";
-      chatlog.scrollTop = chatlog.scrollHeight;
-
-      try {
-        const response = await fetch("/get", {
-          method: "POST",
-          body: new URLSearchParams({ msg }),
-          headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            // This URL is now corrected to match your app.py
+            $.post("/get_response", { msg: rawText }).done(function(data) {
+              console.log("Received from backend:", data);
+                var botHtml = '<p class="bot-message"><span>' + data + '</span></p>';
+                $("#chatlog").append(botHtml);
+                document.getElementById('textInput').scrollIntoView({ block: 'start', behavior: 'smooth' });
+            });
+        }
+        $("#textInput").keypress(function(e) {
+            if (e.which == 13) {
+                sendMessage();
+            }
         });
-
-
-      const data = await response.json();
-      chatlog.innerHTML += `<div class="message bot-message"><p>${data.response}</p></div>`;
-        chatlog.scrollTop = chatlog.scrollHeight; // Scroll to bottom
-      } catch (error) {
-        console.error("Error fetching bot response:", error);
-         chatlog.innerHTML += `<div class="message bot-message"><p>Sorry, I'm having trouble connecting. Please try again later.</p></div>`;
-        chatlog.scrollTop = chatlog.scrollHeight;
-      }
-    }
+        $("#buttonInput").click(function() {
+            sendMessage();
+        });
+      
+    
   </script>
 </body>
 </html>
