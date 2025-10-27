@@ -12,12 +12,13 @@
 </head>
 <body>
   <div class="chatbox">
+    
     <div class="chatbox-header">
-      <h2>College Enquiry Bot</h2>
+      <h2>Astro Bot</h2>
     </div>
     <div id="chatlog">
       <div class="bot-message">
-        <p>Hello! How can I help you today?</p>
+        <p>Hii i am Astro Bot!,How can I assist you today? If you want to know about my abilities, type QUERIES </p>
       </div>
     </div>
     <div class="input-area">
@@ -35,7 +36,7 @@
             console.log("Sending message to backend:", rawText);
            
             let userHtml = '<p class="user-message"><span>' + rawText + '</span></p>';
-            $("#textInput").val("");
+            $("#textInput").val(""); 
             $("#chatlog").append(userHtml);
             document.getElementById('textInput').scrollIntoView({ block: 'start', behavior: 'smooth' });
       

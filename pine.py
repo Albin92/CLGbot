@@ -19,7 +19,7 @@ print("Connection successful.")
 
 # --- 2. Load and Prepare Your Data ---
 print("Loading data from data.csv...")
-data = pd.read_csv('api/data.csv')
+data = pd.read_csv('data.csv')
 data.dropna(subset=['question', 'answer'], inplace=True)
 data = data.reset_index(drop=True)
 print(f"Loaded {len(data)} rows from CSV.")
